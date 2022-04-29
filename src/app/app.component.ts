@@ -13,7 +13,7 @@ export class AppComponent {
 
     this.moviesService.getLists().subscribe( result =>{
       console.log(result);
-      
+  
     });
 
 
