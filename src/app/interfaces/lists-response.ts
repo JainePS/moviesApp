@@ -7,7 +7,7 @@
 // These functions will throw an error if the JSON doesn't
 // match the expected interface, even if the JSON is valid.
 
-export interface movie {
+export interface Movie {
     adult:                 boolean;
     backdrop_path:         string;
     belongs_to_collection: null;
