@@ -12,7 +12,7 @@ export class MoviesService {
   constructor(private http: HttpClient) { }
 
   getLists(): Observable<Movie>{
-    return this.http.get<Movie>('https://api.themoviedb.org/3/movie/550?api_key=a08471f81d82f909a7a921eb4d1f4406')
+    return this.http.get<Movie>('https://api.themoviedb.org/3/movie/now_playing?api_key=a08471f81d82f909a7a921eb4d1f4406&language=en-US&page=1')
   }
 
 }
