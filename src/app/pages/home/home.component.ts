@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   public movies: Result[] = [];
 
   constructor(private moviesService: MoviesService) {}
+  
 
   ngOnInit(): void {
     this.moviesService.getLists().subscribe((result) => {

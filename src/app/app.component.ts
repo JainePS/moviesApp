@@ -7,17 +7,17 @@ import { MoviesService } from './services/movies.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'moviesApp';
+  // title = 'moviesApp';
 
-  constructor(private moviesService: MoviesService){
+  // constructor(private moviesService: MoviesService){
 
-    this.moviesService.getLists().subscribe( result =>{
-      console.log(result);
+  //   this.moviesService.getLists().subscribe( result =>{
+  //     console.log(result);
   
-    });
+  //   });
 
 
-  }
+  // }
 
 
 

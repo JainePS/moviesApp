@@ -1,1 +1,26 @@
-<p>slideshow works!</p>
+<!-- Slider main container -->
+<div class="swiper">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+    <!-- Slides -->
+    <div
+      *ngFor="let movie of movies"
+      class="swiper-slide"
+      [ngStyle]="{
+        'background-size': 'cover',
+        'background':'url(http://image.tmdb.org/t/p/w500'+movie.backdrop_path
+      }"
+    >
+      <div class="movie-description">
+        <h1>{{ movie.title }}</h1>
+        <p>{{ movie.overview | slice: 0:130 }}...</p>
+      </div>
+    </div>
+  </div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+
+  <!-- If we need navigation buttons -->
+  <div (click)="onSlidePrev()" class="swiper-button-prev"></div>
+  <div (click)="onSlideNext()" class="swiper-button-next"></div>
+</div>
