@@ -30,7 +30,7 @@ export class MoviesPostersGridComponent implements OnInit {
 
   onMovieClick( movie: Result ){
     this.router.navigate(['/movie', movie.id]);
-    console.log(movie);
+    
     
   }
 

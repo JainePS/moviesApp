@@ -1,79 +1,52 @@
 // To parse this data:
 //
-//   import { Convert, Welcome } from "./file";
+//   import { Convert, CreditsResponde } from "./file";
 //
-//   const welcome = Convert.toWelcome(json);
+//   const creditsResponde = Convert.toCreditsResponde(json);
 //
 // These functions will throw an error if the JSON doesn't
 // match the expected interface, even if the JSON is valid.
 
-export interface MovieDetail {
-    adult:                 boolean;
-    backdrop_path:         string;
-    belongs_to_collection?: BelongsToCollection;
-    budget:                number;
-    genres:                Genre[];
-    homepage:              string;
-    id:                    number;
-    imdb_id:               string;
-    original_language:     string;
-    original_title:        string;
-    overview:              string;
-    popularity:            number;
-    poster_path:           string;
-    production_companies?:  ProductionCompany[];
-    production_countries?:  ProductionCountry[];
-    release_date:          Date;
-    revenue:               number;
-    runtime:               number;
-    spoken_languages?:      SpokenLanguage[];
-    status:                string;
-    tagline:               string;
-    title:                 string;
-    video:                 boolean;
-    vote_average:          number;
-    vote_count:            number;
-}
-
-export interface BelongsToCollection {
-    id:            number;
-    name:          string;
-    poster_path:   string;
-    backdrop_path: string;
-}
-
-export interface Genre {
+export interface CreditsResponde {
     id:   number;
-    name: string;
+    cast: Cast[];
+    crew: Cast[];
 }
 
-export interface ProductionCompany {
-    id:             number;
-    logo_path:      string;
-    name:           string;
-    origin_country: string;
+export interface Cast {
+    adult:                boolean;
+    gender:               number;
+    id:                   number;
+    known_for_department: Department;
+    name:                 string;
+    original_name:        string;
+    popularity:           number;
+    profile_path:         string;
+    cast_id?:             number;
+    character?:           string;
+    credit_id:            string;
+    order?:               number;
+    department?:          Department;
+    job?:                 string;
 }
 
-export interface ProductionCountry {
-    iso_3166_1: string;
-    name:       string;
-}
-
-export interface SpokenLanguage {
-    english_name: string;
-    iso_639_1:    string;
-    name:         string;
+export enum Department {
+    Acting = "Acting",
+    Directing = "Directing",
+    Production = "Production",
+    Sound = "Sound",
+    Writing = "Writing",
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toMovieDetail(json: string): MovieDetail {
-        return cast(JSON.parse(json), r("MovieDetail"));
+    public static toCreditsResponde(json: string): CreditsResponde {
+        return cast(JSON.parse(json), r("CreditsResponde"));
     }
 
-    public static MovieDetailToJson(value: MovieDetail): string {
-        return JSON.stringify(uncast(value, r("MovieDetail")), null, 2);
+    public static creditsRespondeToJson(value: CreditsResponde): string {
+        return JSON.stringify(uncast(value, r("CreditsResponde")), null, 2);
     }
 }
 
@@ -210,56 +183,32 @@ function r(name: string) {
 }
 
 const typeMap: any = {
-    "MovieDetail": o([
+    "CreditsResponde": o([
+        { json: "id", js: "id", typ: 0 },
+        { json: "cast", js: "cast", typ: a(r("Cast")) },
+        { json: "crew", js: "crew", typ: a(r("Cast")) },
+    ], false),
+    "Cast": o([
         { json: "adult", js: "adult", typ: true },
-        { json: "backdrop_path", js: "backdrop_path", typ: "" },
-        { json: "belongs_to_collection", js: "belongs_to_collection", typ: r("BelongsToCollection") },
-        { json: "budget", js: "budget", typ: 0 },
-        { json: "genres", js: "genres", typ: a(r("Genre")) },
-        { json: "homepage", js: "homepage", typ: "" },
+        { json: "gender", js: "gender", typ: 0 },
         { json: "id", js: "id", typ: 0 },
-        { json: "imdb_id", js: "imdb_id", typ: "" },
-        { json: "original_language", js: "original_language", typ: "" },
-        { json: "original_title", js: "original_title", typ: "" },
-        { json: "overview", js: "overview", typ: "" },
+        { json: "known_for_department", js: "known_for_department", typ: r("Department") },
+        { json: "name", js: "name", typ: "" },
+        { json: "original_name", js: "original_name", typ: "" },
         { json: "popularity", js: "popularity", typ: 3.14 },
-        { json: "poster_path", js: "poster_path", typ: "" },
-        { json: "production_companies", js: "production_companies", typ: a(r("ProductionCompany")) },
-        { json: "production_countries", js: "production_countries", typ: a(r("ProductionCountry")) },
-        { json: "release_date", js: "release_date", typ: Date },
-        { json: "revenue", js: "revenue", typ: 0 },
-        { json: "runtime", js: "runtime", typ: 0 },
-        { json: "spoken_languages", js: "spoken_languages", typ: a(r("SpokenLanguage")) },
-        { json: "status", js: "status", typ: "" },
-        { json: "tagline", js: "tagline", typ: "" },
-        { json: "title", js: "title", typ: "" },
-        { json: "video", js: "video", typ: true },
-        { json: "vote_average", js: "vote_average", typ: 3.14 },
-        { json: "vote_count", js: "vote_count", typ: 0 },
+        { json: "profile_path", js: "profile_path", typ: u(null, "") },
+        { json: "cast_id", js: "cast_id", typ: u(undefined, 0) },
+        { json: "character", js: "character", typ: u(undefined, "") },
+        { json: "credit_id", js: "credit_id", typ: "" },
+        { json: "order", js: "order", typ: u(undefined, 0) },
+        { json: "department", js: "department", typ: u(undefined, r("Department")) },
+        { json: "job", js: "job", typ: u(undefined, "") },
     ], false),
-    "BelongsToCollection": o([
-        { json: "id", js: "id", typ: 0 },
-        { json: "name", js: "name", typ: "" },
-        { json: "poster_path", js: "poster_path", typ: "" },
-        { json: "backdrop_path", js: "backdrop_path", typ: "" },
-    ], false),
-    "Genre": o([
-        { json: "id", js: "id", typ: 0 },
-        { json: "name", js: "name", typ: "" },
-    ], false),
-    "ProductionCompany": o([
-        { json: "id", js: "id", typ: 0 },
-        { json: "logo_path", js: "logo_path", typ: "" },
-        { json: "name", js: "name", typ: "" },
-        { json: "origin_country", js: "origin_country", typ: "" },
-    ], false),
-    "ProductionCountry": o([
-        { json: "iso_3166_1", js: "iso_3166_1", typ: "" },
-        { json: "name", js: "name", typ: "" },
-    ], false),
-    "SpokenLanguage": o([
-        { json: "english_name", js: "english_name", typ: "" },
-        { json: "iso_639_1", js: "iso_639_1", typ: "" },
-        { json: "name", js: "name", typ: "" },
-    ], false),
+    "Department": [
+        "Acting",
+        "Directing",
+        "Production",
+        "Sound",
+        "Writing",
+    ],
 };

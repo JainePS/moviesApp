@@ -3,9 +3,9 @@
     height: 250px;
   }
 
-.swiper-container{
-    height: 400;
-    width: 100;
+  .swiper-container {
+    height: 330px;
+    width: 100%;
 }
 
 .swiper-button-prev, .swiper-button-next {
