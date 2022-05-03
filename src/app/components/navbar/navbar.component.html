@@ -1,9 +1,22 @@
 <nav class="navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/home" >Navbar</a>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search movie" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/home">Navbar</a>
+    <div class="d-flex">
+      <input
+        #txtSearch
+        (keyup.enter)="searchMovie(txtSearch.value)"
+        class="form-control me-2"
+        type="search"
+        placeholder="Search movie"
+        aria-label="Search"
+      />
+      <button
+        (click)="searchMovie(txtSearch.value)"
+        class="btn btn-outline-success"
+        type="submit"
+      >
+        Search
+      </button>
     </div>
-  </nav>
+  </div>
+</nav>
