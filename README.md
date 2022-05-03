@@ -1,3 +1,13 @@
+The Home screen:
+
+![tela1](https://github.com/JainePS/moviesApp/blob/Components/src/assets/tela1.png)
+
+Movie details screen:
+![tela2](https://github.com/JainePS/moviesApp/blob/Components/src/assets/tela2.png)
+
+Serach screen:
+![tela3](https://github.com/JainePS/moviesApp/blob/Components/src/assets/tela3.png)
+
 # MoviesApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.
